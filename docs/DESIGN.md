@@ -221,7 +221,7 @@ BakoApplication / BakoAppDelegate
 - **Activity**：展示扫描、迁移、挂载、恢复和错误记录，可清空。
 - **Settings**：显示中央目录、管理自定义扫描源、执行统一恢复。
 
-macOS 12 没有 `MenuBarExtra`，因此菜单栏使用 `NSStatusItem`。关闭主窗口时实际隐藏并保留 SwiftUI scene，菜单栏可以再次唤起同一窗口。
+macOS 12 没有 `MenuBarExtra`，因此菜单栏使用 `NSStatusItem`。关闭主窗口时实际隐藏并保留 SwiftUI scene，同时切换为 accessory 激活策略，从 Dock 和 `Command-Tab` 中隐藏。通过菜单栏再次打开时，先恢复 regular 激活策略，再唤起同一窗口。
 
 界面通过 `L10n.string` 使用 `en.lproj` 和 `zh-Hans.lproj` 的同名键。测试校验两种语言的键集合和格式占位符一致。
 

@@ -439,6 +439,7 @@ final class BakoModel: ObservableObject {
     func moveGroups(fromOffsets source: IndexSet, toOffset destination: Int) {
         groups.move(fromOffsets: source, toOffset: destination)
         Task { await persist() }
+        MenuBarController.shared.refresh()
     }
 
     func revealCentralStore() {

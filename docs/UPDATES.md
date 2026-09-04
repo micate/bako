@@ -48,6 +48,24 @@ cp Config/Local.xcconfig.example Config/Local.xcconfig
 
 发布后必须从安装在 `/Applications` 中的上一正式版本执行一次完整升级测试，验证发现版本、签名校验、安装、退出和重启。
 
+## 本机覆盖安装
+
+不要把 `CODE_SIGNING_ALLOWED=NO` 的构建直接复制到 `/Applications`。Bako 内嵌
+Sparkle；当本机没有可用的 Apple 代码签名证书时，主程序和 Sparkle 使用临时签名，
+Hardened Runtime 的 Library Validation 无法匹配 Team ID，应用会在 `dyld` 加载
+`Sparkle.framework` 时崩溃。
+
+本机临时安装可以保留 Hardened Runtime，并使用
+`Config/Bako-Debug.entitlements` 中的
+`com.apple.security.cs.disable-library-validation` 权限重新签名外层 App。该方案仅供
+本机开发验证，不替代 Developer ID 签名和公证。
+
+覆盖安装完成后必须执行三项验证：
+
+1. 使用 `codesign --verify --deep --strict` 校验整个 App bundle；
+2. 从 `/Applications/Bako.app` 实际启动并确认进程持续运行；
+3. 确认 `~/Library/Logs/DiagnosticReports` 中没有产生新的 Bako 崩溃报告。
+
 ## 应用内行为
 
 - Sparkle 按自己的调度策略执行后台检查。

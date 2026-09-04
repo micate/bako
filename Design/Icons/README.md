@@ -3,27 +3,28 @@
 The approved application icon is the blue box with the pale-blue circular switching mark.
 The artwork uses a transparent canvas, an optically centered macOS-style tile, and a
 restrained ambient shadow so its visible size matches neighboring Dock icons.
-The menu bar variant preserves the complete pale-blue tile, blue box, and
-pale-blue switching mark. Its brand colors are intentionally shared by light
-and dark appearances rather than being recolored by macOS.
+The menu bar variant preserves the full-color application mark. Its 18 px and 36 px
+exports are optically centered for AppKit's square status item, including a half-point
+downward correction on Retina displays.
 
 ## Xcode assets
 
 `BakoAssets.xcassets` is ready to add to the macOS application target:
 
 - `AppIcon` contains the complete macOS 16–1024 px icon matrix.
-- `MenuBarIcon` contains 18 px and 36 px full-color images.
+- `MenuBarIcon` contains optically centered 18 px and 36 px full-color images.
 
 Render the menu bar image in its original colors:
 
 ```swift
 let image = NSImage(named: "MenuBarIcon")
+image?.size = NSSize(width: 18, height: 18)
 image?.isTemplate = false
 statusItem.button?.image = image
 ```
 
-The same asset is used in light and dark appearances; the pale-blue tile keeps
-the blue mark legible on either menu-bar background.
+The same full-color artwork is used in light and dark appearances. The light tile keeps
+the blue mark legible against either menu-bar background and its highlighted state.
 
 ## Exports
 

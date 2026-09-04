@@ -540,12 +540,13 @@ private struct SkillCatalogRow: View {
 private struct GroupsView: View {
     @EnvironmentObject private var model: BakoModel
     @State private var selectedID: UUID?
+    @State private var pendingNameFocusID: UUID?
 
     var body: some View {
         VStack(alignment: .leading, spacing: AppStyle.pageSpacing) {
             HStack(alignment: .center, spacing: 12) {
                 PageHeader(title: L10n.string("sidebar.groups"), subtitle: L10n.string("groups.subtitle"))
-                Button(action: model.createGroup) {
+                Button(action: createAndSelectGroup) {
                     Label(L10n.string("groups.new"), systemImage: "plus")
                 }
                 .buttonStyle(.bordered)
@@ -557,18 +558,28 @@ private struct GroupsView: View {
                     title: L10n.string("groups.empty.title"),
                     detail: L10n.string("groups.empty.detail"),
                     buttonTitle: L10n.string("groups.new"),
-                    action: model.createGroup
+                    action: createAndSelectGroup
                 )
             } else {
                 HStack(spacing: 0) {
                     List(selection: $selectedID) {
                         ForEach(model.groups) { group in
-                            GroupRow(group: group)
-                                .tag(group.id)
+                            GroupRow(
+                                group: group,
+                                onToggle: { model.toggleGroup(group.id) }
+                            )
+                            .tag(group.id)
+                            .listRowInsets(EdgeInsets())
+                            .listRowBackground(
+                                selectedID == group.id
+                                    ? Color.accentColor.opacity(0.07)
+                                    : Color.clear
+                            )
                         }
                         .onMove(perform: model.moveGroups)
                     }
                     .listStyle(.plain)
+                    .environment(\.defaultMinListRowHeight, 44)
                     .frame(width: 220)
                     .background(Color(nsColor: .controlBackgroundColor))
 
@@ -576,7 +587,15 @@ private struct GroupsView: View {
 
                     if let groupID = selectedID ?? model.groups.first?.id,
                        let group = model.groups.first(where: { $0.id == groupID }) {
-                        GroupDetailView(group: group)
+                        GroupDetailView(
+                            group: group,
+                            focusesNameOnAppear: pendingNameFocusID == groupID,
+                            onNameFocusHandled: {
+                                if pendingNameFocusID == groupID {
+                                    pendingNameFocusID = nil
+                                }
+                            }
+                        )
                             .id(groupID)
                     } else {
                         EmptyState(
@@ -603,31 +622,58 @@ private struct GroupsView: View {
         }
     }
 
+    private func createAndSelectGroup() {
+        model.createGroup()
+        guard let groupID = model.groups.last?.id else { return }
+        selectedID = groupID
+        pendingNameFocusID = groupID
+    }
+
     private struct GroupRow: View {
         var group: SkillGroup
+        var onToggle: () -> Void
 
         var body: some View {
             HStack(spacing: 8) {
-                Circle()
-                    .fill(group.isEnabled ? Color.accentColor : Color.secondary.opacity(0.28))
-                    .frame(width: 6, height: 6)
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(group.name).font(.system(size: 13, weight: .medium)).lineLimit(1)
+                VStack(alignment: .leading, spacing: 0) {
+                    Text(group.name)
+                        .font(.system(size: 13, weight: .medium))
+                        .lineLimit(1)
                     Text(L10n.string(
                         "groups.summary",
                         Int64(group.skillIDs.count),
                         Int64(group.targets.count)
                     ))
-                        .font(.system(size: 11)).foregroundColor(.secondary)
+                        .font(.system(size: 10))
+                        .foregroundColor(.secondary)
+                        .lineLimit(1)
                 }
                 Spacer(minLength: 0)
-                Image(systemName: "line.3.horizontal")
-                    .font(.system(size: 11, weight: .medium))
-                    .foregroundColor(.secondary.opacity(0.7))
-                    .help(L10n.string("groups.reorder.help"))
+
+                Toggle("", isOn: Binding(
+                    get: { group.isEnabled },
+                    set: { enabled in
+                        if enabled != group.isEnabled { onToggle() }
+                    }
+                ))
+                .labelsHidden()
+                .toggleStyle(.switch)
+                .controlSize(.mini)
+                .fixedSize()
+                .accessibilityLabel(L10n.string("common.enable"))
             }
-            .padding(.vertical, AppStyle.rowVerticalPadding)
+            .padding(.leading, 12)
+            .padding(.trailing, 2)
+            .frame(maxWidth: .infinity, minHeight: 44, maxHeight: 44)
             .contentShape(Rectangle())
+            .help(L10n.string("groups.reorder.help"))
+            .onHover { isHovering in
+                if isHovering {
+                    NSCursor.openHand.push()
+                } else {
+                    NSCursor.pop()
+                }
+            }
         }
     }
 }
@@ -635,31 +681,29 @@ private struct GroupsView: View {
 private struct GroupDetailView: View {
     @EnvironmentObject private var model: BakoModel
     let group: SkillGroup
+    let focusesNameOnAppear: Bool
+    let onNameFocusHandled: () -> Void
     @State private var draft: SkillGroup
     @FocusState private var nameIsFocused: Bool
     @State private var showsDeleteConfirmation = false
 
-    init(group: SkillGroup) {
+    init(group: SkillGroup, focusesNameOnAppear: Bool, onNameFocusHandled: @escaping () -> Void) {
         self.group = group
+        self.focusesNameOnAppear = focusesNameOnAppear
+        self.onNameFocusHandled = onNameFocusHandled
         _draft = State(initialValue: group)
     }
 
     var body: some View {
         VStack(spacing: 0) {
             VStack(alignment: .leading, spacing: 0) {
-                HStack(alignment: .bottom, spacing: 16) {
-                    VStack(alignment: .leading, spacing: 6) {
-                        Text(L10n.string("groups.name")).font(.system(size: 12, weight: .semibold)).foregroundColor(.secondary)
-                        TextField(L10n.string("groups.name.placeholder"), text: $draft.name)
-                            .textFieldStyle(.roundedBorder)
-                            .font(.system(size: 13, weight: .medium))
-                            .focused($nameIsFocused)
-                            .frame(minWidth: 240)
-                    }
-                    Toggle(L10n.string("common.enable"), isOn: $draft.isEnabled)
-                        .toggleStyle(.switch)
-                        .padding(.bottom, 4)
-                        .fixedSize()
+                VStack(alignment: .leading, spacing: 6) {
+                    Text(L10n.string("groups.name")).font(.system(size: 12, weight: .semibold)).foregroundColor(.secondary)
+                    TextField(L10n.string("groups.name.placeholder"), text: $draft.name)
+                        .textFieldStyle(.roundedBorder)
+                        .font(.system(size: 13, weight: .medium))
+                        .focused($nameIsFocused)
+                        .frame(minWidth: 240)
                 }
 
                 VStack(alignment: .leading, spacing: 8) {
@@ -695,6 +739,7 @@ private struct GroupDetailView: View {
                         )
                     }
                 }
+                .padding(.top, 16)
                 .frame(maxHeight: .infinity)
             }
             .frame(maxWidth: 620, maxHeight: .infinity, alignment: .topLeading)
@@ -717,7 +762,7 @@ private struct GroupDetailView: View {
                 }
                 Spacer()
                 Button(L10n.string("groups.save")) {
-                    model.saveGroup(draft)
+                    saveDraft()
                 }
                 .buttonStyle(.borderedProminent)
                 .disabled(!hasUnsavedChanges || draft.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
@@ -734,6 +779,18 @@ private struct GroupDetailView: View {
             Text(L10n.string(draft.isSystem
                  ? "groups.delete.system_detail"
                  : "groups.delete.detail"))
+        }
+        .onAppear(perform: focusAndSelectNameIfNeeded)
+    }
+
+    private func focusAndSelectNameIfNeeded() {
+        guard focusesNameOnAppear else { return }
+        DispatchQueue.main.async {
+            nameIsFocused = true
+            DispatchQueue.main.async {
+                (NSApp.keyWindow?.firstResponder as? NSTextView)?.selectAll(nil)
+                onNameFocusHandled()
+            }
         }
     }
 
@@ -758,8 +815,14 @@ private struct GroupDetailView: View {
     private var hasUnsavedChanges: Bool {
         draft.name != group.name ||
         draft.skillIDs != group.skillIDs ||
-        draft.targets != group.targets ||
-        draft.isEnabled != group.isEnabled
+        draft.targets != group.targets
+    }
+
+    private func saveDraft() {
+        var updated = draft
+        updated.isEnabled = group.isEnabled
+        updated.lastEnabledAt = group.lastEnabledAt
+        model.saveGroup(updated)
     }
 
     private var groupableSkills: [Skill] {
