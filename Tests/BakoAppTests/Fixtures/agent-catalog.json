@@ -1,0 +1,15 @@
+{
+  "agents": [
+    {"id":"codex","status":"managed","detectionPaths":["~/.codex"],"endpoints":[{"id":"codex-native","path":"~/.codex/skills","kinds":["directoryBundle"]}],"compatibility":["shared-agents"]},
+    {"id":"claude","status":"managed","detectionPaths":["~/.claude"],"endpoints":[{"id":"claude-native","path":"~/.claude/skills","kinds":["directoryBundle"]}],"compatibility":[]},
+    {"id":"cursor","status":"experimental","detectionPaths":["~/.cursor"],"endpoints":[],"compatibility":["shared-agents"]},
+    {"id":"qoder","status":"managed","detectionPaths":["~/.qoder"],"endpoints":[{"id":"qoder-native","path":"~/.qoder/skills","kinds":["directoryBundle"]}],"compatibility":[]},
+    {"id":"qoder-cn","status":"managed","detectionPaths":["~/.lingma"],"endpoints":[{"id":"qoder-cn-native","path":"~/.lingma/skills","kinds":["directoryBundle"]}],"compatibility":[]},
+    {"id":"deepseek-harness","status":"managed","detectionPaths":["${DSH_HOME:-~/.dsh}"],"endpoints":[{"id":"deepseek-native","path":"${DSH_HOME:-~/.dsh}/skills","kinds":["directoryBundle","flatMarkdown"]}],"compatibility":["shared-agents"]},
+    {"id":"zcode","status":"managed","detectionPaths":["~/.zcode"],"endpoints":[{"id":"zcode-native","path":"~/.zcode/skills","kinds":["directoryBundle"]}],"compatibility":[]},
+    {"id":"openclaw","status":"managed","detectionPaths":["~/.openclaw"],"endpoints":[{"id":"openclaw-native","path":"~/.openclaw/skills","kinds":["directoryBundle"]}],"compatibility":["shared-agents"]},
+    {"id":"kilo","status":"managed","detectionPaths":["~/.kilo"],"endpoints":[{"id":"kilo-native","path":"~/.kilo/skills","kinds":["directoryBundle"]}],"compatibility":["shared-agents"]},
+    {"id":"zoo","status":"managed","detectionPaths":["~/.roo"],"endpoints":[{"id":"zoo-native","path":"~/.roo/skills","kinds":["directoryBundle"]}],"compatibility":["shared-agents"]},
+    {"id":"devin","status":"detectOnly","detectionPaths":["~/Library/Application Support/Devin"],"endpoints":[],"compatibility":[]}
+  ]
+}

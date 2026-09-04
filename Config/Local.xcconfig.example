@@ -1,0 +1,4 @@
+// Copy this file to Local.xcconfig. The real file is ignored by Git.
+DEVELOPMENT_TEAM = YOUR_TEAM_ID
+BAKO_UPDATE_FEED_URL = https://updates.example.com/bako/appcast.xml
+BAKO_UPDATE_PUBLIC_ED_KEY = YOUR_SPARKLE_EDDSA_PUBLIC_KEY

@@ -1,0 +1,22 @@
+PRODUCT_NAME = Bako
+PRODUCT_MODULE_NAME = BakoApp
+PRODUCT_BUNDLE_IDENTIFIER = com.micate.Bako
+
+MARKETING_VERSION = 0.1.0
+CURRENT_PROJECT_VERSION = 1
+MACOSX_DEPLOYMENT_TARGET = 12.0
+SWIFT_VERSION = 5.0
+
+INFOPLIST_FILE = Config/Bako-Info.plist
+GENERATE_INFOPLIST_FILE = NO
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon
+ENABLE_HARDENED_RUNTIME = YES
+CODE_SIGN_STYLE = Automatic
+
+LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/../Frameworks
+
+// Populate these two values in a private Release override or CI settings.
+BAKO_UPDATE_FEED_URL =
+BAKO_UPDATE_PUBLIC_ED_KEY =
+
+#include? "Local.xcconfig"

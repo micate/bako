@@ -1,0 +1,191 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 60;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		800000000000000000000001 /* BakoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700000000000000000000001 /* BakoApp.swift */; };
+		800000000000000000000002 /* AgentCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700000000000000000000002 /* AgentCatalog.swift */; };
+		800000000000000000000003 /* PathResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700000000000000000000003 /* PathResolver.swift */; };
+		800000000000000000000004 /* BakoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700000000000000000000004 /* BakoModel.swift */; };
+		800000000000000000000005 /* MainWindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700000000000000000000005 /* MainWindowView.swift */; };
+		800000000000000000000006 /* MenuBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700000000000000000000006 /* MenuBarController.swift */; };
+		800000000000000000000007 /* UpdateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700000000000000000000007 /* UpdateController.swift */; };
+		800000000000000000000008 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700000000000000000000008 /* Models.swift */; };
+		800000000000000000000009 /* MountPlanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700000000000000000000009 /* MountPlanner.swift */; };
+		80000000000000000000000A /* SkillMetadataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70000000000000000000000A /* SkillMetadataParser.swift */; };
+		80000000000000000000000B /* Fingerprinter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70000000000000000000000B /* Fingerprinter.swift */; };
+		80000000000000000000000C /* LinkReconciler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70000000000000000000000C /* LinkReconciler.swift */; };
+		80000000000000000000000D /* MigrationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70000000000000000000000D /* MigrationEngine.swift */; };
+		80000000000000000000000E /* RecoveryEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70000000000000000000000E /* RecoveryEngine.swift */; };
+		80000000000000000000000F /* ScanSourceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70000000000000000000000F /* ScanSourceManager.swift */; };
+		800000000000000000000010 /* SkillRestoreEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700000000000000000000010 /* SkillRestoreEngine.swift */; };
+		800000000000000000000011 /* SkillScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700000000000000000000011 /* SkillScanner.swift */; };
+		800000000000000000000012 /* TransactionJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700000000000000000000012 /* TransactionJournal.swift */; };
+		800000000000000000000013 /* AppResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700000000000000000000013 /* AppResources.swift */; };
+		800000000000000000000014 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700000000000000000000014 /* L10n.swift */; };
+		800000000000000000000015 /* StateStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700000000000000000000015 /* StateStore.swift */; };
+		800000000000000000000016 /* Bako-AppIcon-1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 700000000000000000000016 /* Bako-AppIcon-1024.png */; };
+		800000000000000000000017 /* MenuBarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 700000000000000000000017 /* MenuBarIcon.png */; };
+		800000000000000000000018 /* MenuBarIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 700000000000000000000018 /* MenuBarIcon@2x.png */; };
+		800000000000000000000019 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 70000000000000000000001B /* Localizable.strings */; };
+		80000000000000000000001A /* BakoAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70000000000000000000001C /* BakoAssets.xcassets */; };
+		80000000000000000000001B /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = F00000000000000000000002 /* Sparkle */; };
+		80000000000000000000001C /* SkillDeletionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700000000000000000000037 /* SkillDeletionEngine.swift */; };
+		900000000000000000000001 /* AgentCatalogContractTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700000000000000000000020 /* AgentCatalogContractTests.swift */; };
+		900000000000000000000002 /* FingerprinterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700000000000000000000021 /* FingerprinterTests.swift */; };
+		900000000000000000000003 /* LinkReconcilerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700000000000000000000022 /* LinkReconcilerTests.swift */; };
+		900000000000000000000004 /* LocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700000000000000000000023 /* LocalizationTests.swift */; };
+		900000000000000000000005 /* MigrationEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700000000000000000000024 /* MigrationEngineTests.swift */; };
+		900000000000000000000006 /* MountPlannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700000000000000000000025 /* MountPlannerTests.swift */; };
+		900000000000000000000007 /* PathResolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700000000000000000000026 /* PathResolverTests.swift */; };
+		900000000000000000000008 /* RecoveryEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700000000000000000000027 /* RecoveryEngineTests.swift */; };
+		900000000000000000000009 /* ScanSourceManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700000000000000000000028 /* ScanSourceManagerTests.swift */; };
+		90000000000000000000000A /* SkillMetadataParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700000000000000000000029 /* SkillMetadataParserTests.swift */; };
+		90000000000000000000000B /* SkillRestoreEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70000000000000000000002A /* SkillRestoreEngineTests.swift */; };
+		90000000000000000000000C /* StateStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70000000000000000000002B /* StateStoreTests.swift */; };
+		90000000000000000000000D /* agent-catalog.json in Resources */ = {isa = PBXBuildFile; fileRef = 70000000000000000000002C /* agent-catalog.json */; };
+		90000000000000000000000E /* SkillDeletionEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700000000000000000000038 /* SkillDeletionEngineTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C00000000000000000000007 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A00000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B00000000000000000000001;
+			remoteInfo = BakoApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		600000000000000000000001 /* Bako.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bako.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		600000000000000000000002 /* BakoAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BakoAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		700000000000000000000001 /* BakoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BakoApp.swift; sourceTree = "<group>"; };
+		700000000000000000000002 /* AgentCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentCatalog.swift; sourceTree = "<group>"; };
+		700000000000000000000003 /* PathResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathResolver.swift; sourceTree = "<group>"; };
+		700000000000000000000004 /* BakoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BakoModel.swift; sourceTree = "<group>"; };
+		700000000000000000000005 /* MainWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowView.swift; sourceTree = "<group>"; };
+		700000000000000000000006 /* MenuBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarController.swift; sourceTree = "<group>"; };
+		700000000000000000000007 /* UpdateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateController.swift; sourceTree = "<group>"; };
+		700000000000000000000008 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		700000000000000000000009 /* MountPlanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MountPlanner.swift; sourceTree = "<group>"; };
+		70000000000000000000000A /* SkillMetadataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillMetadataParser.swift; sourceTree = "<group>"; };
+		70000000000000000000000B /* Fingerprinter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fingerprinter.swift; sourceTree = "<group>"; };
+		70000000000000000000000C /* LinkReconciler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkReconciler.swift; sourceTree = "<group>"; };
+		70000000000000000000000D /* MigrationEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationEngine.swift; sourceTree = "<group>"; };
+		70000000000000000000000E /* RecoveryEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryEngine.swift; sourceTree = "<group>"; };
+		70000000000000000000000F /* ScanSourceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanSourceManager.swift; sourceTree = "<group>"; };
+		700000000000000000000010 /* SkillRestoreEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillRestoreEngine.swift; sourceTree = "<group>"; };
+		700000000000000000000011 /* SkillScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillScanner.swift; sourceTree = "<group>"; };
+		700000000000000000000012 /* TransactionJournal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionJournal.swift; sourceTree = "<group>"; };
+		700000000000000000000013 /* AppResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppResources.swift; sourceTree = "<group>"; };
+		700000000000000000000014 /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
+		700000000000000000000015 /* StateStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateStore.swift; sourceTree = "<group>"; };
+		700000000000000000000016 /* Bako-AppIcon-1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bako-AppIcon-1024.png"; sourceTree = "<group>"; };
+		700000000000000000000017 /* MenuBarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MenuBarIcon.png; sourceTree = "<group>"; };
+		700000000000000000000018 /* MenuBarIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MenuBarIcon@2x.png"; sourceTree = "<group>"; };
+		700000000000000000000019 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		70000000000000000000001A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		70000000000000000000001C /* BakoAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = BakoAssets.xcassets; sourceTree = "<group>"; };
+		700000000000000000000020 /* AgentCatalogContractTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentCatalogContractTests.swift; sourceTree = "<group>"; };
+		700000000000000000000021 /* FingerprinterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FingerprinterTests.swift; sourceTree = "<group>"; };
+		700000000000000000000022 /* LinkReconcilerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkReconcilerTests.swift; sourceTree = "<group>"; };
+		700000000000000000000023 /* LocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationTests.swift; sourceTree = "<group>"; };
+		700000000000000000000024 /* MigrationEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationEngineTests.swift; sourceTree = "<group>"; };
+		700000000000000000000025 /* MountPlannerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MountPlannerTests.swift; sourceTree = "<group>"; };
+		700000000000000000000026 /* PathResolverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathResolverTests.swift; sourceTree = "<group>"; };
+		700000000000000000000027 /* RecoveryEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryEngineTests.swift; sourceTree = "<group>"; };
+		700000000000000000000028 /* ScanSourceManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanSourceManagerTests.swift; sourceTree = "<group>"; };
+		700000000000000000000029 /* SkillMetadataParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillMetadataParserTests.swift; sourceTree = "<group>"; };
+		70000000000000000000002A /* SkillRestoreEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillRestoreEngineTests.swift; sourceTree = "<group>"; };
+		70000000000000000000002B /* StateStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateStoreTests.swift; sourceTree = "<group>"; };
+		70000000000000000000002C /* agent-catalog.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "agent-catalog.json"; sourceTree = "<group>"; };
+		700000000000000000000030 /* Bako-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Bako-Info.plist"; sourceTree = "<group>"; };
+		700000000000000000000031 /* Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Base.xcconfig; sourceTree = "<group>"; };
+		700000000000000000000032 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		700000000000000000000033 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		700000000000000000000034 /* Tests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Tests.xcconfig; sourceTree = "<group>"; };
+		700000000000000000000035 /* Bako.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bako.entitlements; sourceTree = "<group>"; };
+		700000000000000000000036 /* Bako-Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Bako-Debug.entitlements"; sourceTree = "<group>"; };
+		700000000000000000000037 /* SkillDeletionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillDeletionEngine.swift; sourceTree = "<group>"; };
+		700000000000000000000038 /* SkillDeletionEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillDeletionEngineTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C00000000000000000000002 /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (80000000000000000000001B /* Sparkle in Frameworks */,); runOnlyForDeploymentPostprocessing = 0; };
+		C00000000000000000000005 /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A00000000000000000000002 = {isa = PBXGroup; children = (A00000000000000000000004 /* BakoApp */, A0000000000000000000000C /* BakoAppTests */, A0000000000000000000000E /* Config */, A0000000000000000000000F /* Design */, A00000000000000000000003 /* Products */,); sourceTree = "<group>"; };
+		A00000000000000000000003 /* Products */ = {isa = PBXGroup; children = (600000000000000000000001 /* Bako.app */, 600000000000000000000002 /* BakoAppTests.xctest */,); name = Products; sourceTree = "<group>"; };
+		A00000000000000000000004 /* BakoApp */ = {isa = PBXGroup; children = (700000000000000000000001 /* BakoApp.swift */, A00000000000000000000006 /* AgentCatalog */, A00000000000000000000005 /* AppUI */, A00000000000000000000007 /* Domain */, A00000000000000000000008 /* FileSystem */, A00000000000000000000009 /* Localization */, A0000000000000000000000A /* Persistence */, A0000000000000000000000B /* Resources */,); name = BakoApp; path = Sources/BakoApp; sourceTree = SOURCE_ROOT; };
+		A00000000000000000000005 /* AppUI */ = {isa = PBXGroup; children = (700000000000000000000004 /* BakoModel.swift */, 700000000000000000000005 /* MainWindowView.swift */, 700000000000000000000006 /* MenuBarController.swift */, 700000000000000000000007 /* UpdateController.swift */,); path = AppUI; sourceTree = "<group>"; };
+		A00000000000000000000006 /* AgentCatalog */ = {isa = PBXGroup; children = (700000000000000000000002 /* AgentCatalog.swift */, 700000000000000000000003 /* PathResolver.swift */,); path = AgentCatalog; sourceTree = "<group>"; };
+		A00000000000000000000007 /* Domain */ = {isa = PBXGroup; children = (700000000000000000000008 /* Models.swift */, 700000000000000000000009 /* MountPlanner.swift */, 70000000000000000000000A /* SkillMetadataParser.swift */,); path = Domain; sourceTree = "<group>"; };
+		A00000000000000000000008 /* FileSystem */ = {isa = PBXGroup; children = (70000000000000000000000B /* Fingerprinter.swift */, 70000000000000000000000C /* LinkReconciler.swift */, 70000000000000000000000D /* MigrationEngine.swift */, 70000000000000000000000E /* RecoveryEngine.swift */, 70000000000000000000000F /* ScanSourceManager.swift */, 700000000000000000000037 /* SkillDeletionEngine.swift */, 700000000000000000000010 /* SkillRestoreEngine.swift */, 700000000000000000000011 /* SkillScanner.swift */, 700000000000000000000012 /* TransactionJournal.swift */,); path = FileSystem; sourceTree = "<group>"; };
+		A00000000000000000000009 /* Localization */ = {isa = PBXGroup; children = (700000000000000000000013 /* AppResources.swift */, 700000000000000000000014 /* L10n.swift */,); path = Localization; sourceTree = "<group>"; };
+		A0000000000000000000000A /* Persistence */ = {isa = PBXGroup; children = (700000000000000000000015 /* StateStore.swift */,); path = Persistence; sourceTree = "<group>"; };
+		A0000000000000000000000B /* Resources */ = {isa = PBXGroup; children = (700000000000000000000016 /* Bako-AppIcon-1024.png */, 700000000000000000000017 /* MenuBarIcon.png */, 700000000000000000000018 /* MenuBarIcon@2x.png */, 70000000000000000000001B /* Localizable.strings */,); path = Resources; sourceTree = "<group>"; };
+		A0000000000000000000000C /* BakoAppTests */ = {isa = PBXGroup; children = (700000000000000000000020 /* AgentCatalogContractTests.swift */, 700000000000000000000021 /* FingerprinterTests.swift */, 700000000000000000000022 /* LinkReconcilerTests.swift */, 700000000000000000000023 /* LocalizationTests.swift */, 700000000000000000000024 /* MigrationEngineTests.swift */, 700000000000000000000025 /* MountPlannerTests.swift */, 700000000000000000000026 /* PathResolverTests.swift */, 700000000000000000000027 /* RecoveryEngineTests.swift */, 700000000000000000000028 /* ScanSourceManagerTests.swift */, 700000000000000000000038 /* SkillDeletionEngineTests.swift */, 700000000000000000000029 /* SkillMetadataParserTests.swift */, 70000000000000000000002A /* SkillRestoreEngineTests.swift */, 70000000000000000000002B /* StateStoreTests.swift */, A0000000000000000000000D /* Fixtures */,); name = BakoAppTests; path = Tests/BakoAppTests; sourceTree = SOURCE_ROOT; };
+		A0000000000000000000000D /* Fixtures */ = {isa = PBXGroup; children = (70000000000000000000002C /* agent-catalog.json */,); path = Fixtures; sourceTree = "<group>"; };
+		A0000000000000000000000E /* Config */ = {isa = PBXGroup; children = (700000000000000000000030 /* Bako-Info.plist */, 700000000000000000000031 /* Base.xcconfig */, 700000000000000000000032 /* Debug.xcconfig */, 700000000000000000000033 /* Release.xcconfig */, 700000000000000000000034 /* Tests.xcconfig */, 700000000000000000000035 /* Bako.entitlements */, 700000000000000000000036 /* Bako-Debug.entitlements */,); path = Config; sourceTree = SOURCE_ROOT; };
+		A0000000000000000000000F /* Design */ = {isa = PBXGroup; children = (70000000000000000000001C /* BakoAssets.xcassets */,); name = Design; path = Design/Icons; sourceTree = SOURCE_ROOT; };
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B00000000000000000000001 /* BakoApp */ = {isa = PBXNativeTarget; buildConfigurationList = E00000000000000000000002 /* Build configuration list for PBXNativeTarget "BakoApp" */; buildPhases = (C00000000000000000000001 /* Sources */, C00000000000000000000002 /* Frameworks */, C00000000000000000000003 /* Resources */,); buildRules = (); dependencies = (); name = BakoApp; packageProductDependencies = (F00000000000000000000002 /* Sparkle */,); productName = Bako; productReference = 600000000000000000000001 /* Bako.app */; productType = "com.apple.product-type.application"; };
+		B00000000000000000000002 /* BakoAppTests */ = {isa = PBXNativeTarget; buildConfigurationList = E00000000000000000000003 /* Build configuration list for PBXNativeTarget "BakoAppTests" */; buildPhases = (C00000000000000000000004 /* Sources */, C00000000000000000000005 /* Frameworks */, C00000000000000000000006 /* Resources */,); buildRules = (); dependencies = (C00000000000000000000008 /* PBXTargetDependency */,); name = BakoAppTests; packageProductDependencies = (); productName = BakoAppTests; productReference = 600000000000000000000002 /* BakoAppTests.xctest */; productType = "com.apple.product-type.bundle.unit-test"; };
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A00000000000000000000001 /* Project object */ = {isa = PBXProject; attributes = {BuildIndependentTargetsInParallel = 1; LastSwiftUpdateCheck = 2620; LastUpgradeCheck = 2620; TargetAttributes = {B00000000000000000000001 = {CreatedOnToolsVersion = 26.2; }; B00000000000000000000002 = {CreatedOnToolsVersion = 26.2; TestTargetID = B00000000000000000000001; }; }; }; buildConfigurationList = E00000000000000000000001 /* Build configuration list for PBXProject "Bako" */; compatibilityVersion = "Xcode 14.0"; developmentRegion = en; hasScannedForEncodings = 0; knownRegions = (en, Base, "zh-Hans",); mainGroup = A00000000000000000000002; packageReferences = (F00000000000000000000001 /* XCRemoteSwiftPackageReference "Sparkle" */,); productRefGroup = A00000000000000000000003 /* Products */; projectDirPath = ""; projectRoot = ""; targets = (B00000000000000000000001 /* BakoApp */, B00000000000000000000002 /* BakoAppTests */,); };
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C00000000000000000000003 /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (800000000000000000000016 /* Bako-AppIcon-1024.png in Resources */, 800000000000000000000017 /* MenuBarIcon.png in Resources */, 800000000000000000000018 /* MenuBarIcon@2x.png in Resources */, 800000000000000000000019 /* Localizable.strings in Resources */, 80000000000000000000001A /* BakoAssets.xcassets in Resources */,); runOnlyForDeploymentPostprocessing = 0; };
+		C00000000000000000000006 /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (90000000000000000000000D /* agent-catalog.json in Resources */,); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C00000000000000000000001 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (800000000000000000000001 /* BakoApp.swift in Sources */, 800000000000000000000002 /* AgentCatalog.swift in Sources */, 800000000000000000000003 /* PathResolver.swift in Sources */, 800000000000000000000004 /* BakoModel.swift in Sources */, 800000000000000000000005 /* MainWindowView.swift in Sources */, 800000000000000000000006 /* MenuBarController.swift in Sources */, 800000000000000000000007 /* UpdateController.swift in Sources */, 800000000000000000000008 /* Models.swift in Sources */, 800000000000000000000009 /* MountPlanner.swift in Sources */, 80000000000000000000000A /* SkillMetadataParser.swift in Sources */, 80000000000000000000000B /* Fingerprinter.swift in Sources */, 80000000000000000000000C /* LinkReconciler.swift in Sources */, 80000000000000000000000D /* MigrationEngine.swift in Sources */, 80000000000000000000000E /* RecoveryEngine.swift in Sources */, 80000000000000000000000F /* ScanSourceManager.swift in Sources */, 80000000000000000000001C /* SkillDeletionEngine.swift in Sources */, 800000000000000000000010 /* SkillRestoreEngine.swift in Sources */, 800000000000000000000011 /* SkillScanner.swift in Sources */, 800000000000000000000012 /* TransactionJournal.swift in Sources */, 800000000000000000000013 /* AppResources.swift in Sources */, 800000000000000000000014 /* L10n.swift in Sources */, 800000000000000000000015 /* StateStore.swift in Sources */,); runOnlyForDeploymentPostprocessing = 0; };
+		C00000000000000000000004 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (900000000000000000000001 /* AgentCatalogContractTests.swift in Sources */, 900000000000000000000002 /* FingerprinterTests.swift in Sources */, 900000000000000000000003 /* LinkReconcilerTests.swift in Sources */, 900000000000000000000004 /* LocalizationTests.swift in Sources */, 900000000000000000000005 /* MigrationEngineTests.swift in Sources */, 900000000000000000000006 /* MountPlannerTests.swift in Sources */, 900000000000000000000007 /* PathResolverTests.swift in Sources */, 900000000000000000000008 /* RecoveryEngineTests.swift in Sources */, 900000000000000000000009 /* ScanSourceManagerTests.swift in Sources */, 90000000000000000000000E /* SkillDeletionEngineTests.swift in Sources */, 90000000000000000000000A /* SkillMetadataParserTests.swift in Sources */, 90000000000000000000000B /* SkillRestoreEngineTests.swift in Sources */, 90000000000000000000000C /* StateStoreTests.swift in Sources */,); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C00000000000000000000008 /* PBXTargetDependency */ = {isa = PBXTargetDependency; target = B00000000000000000000001 /* BakoApp */; targetProxy = C00000000000000000000007 /* PBXContainerItemProxy */; };
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		70000000000000000000001B /* Localizable.strings */ = {isa = PBXVariantGroup; children = (700000000000000000000019 /* en */, 70000000000000000000001A /* zh-Hans */,); name = Localizable.strings; sourceTree = "<group>"; };
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D00000000000000000000001 /* Debug */ = {isa = XCBuildConfiguration; buildSettings = {ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ANALYZER_NONNULL = YES; CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE; CLANG_CXX_LANGUAGE_STANDARD = "gnu++20"; CLANG_ENABLE_MODULES = YES; CLANG_ENABLE_OBJC_ARC = YES; CLANG_ENABLE_OBJC_WEAK = YES; CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES; CLANG_WARN_BOOL_CONVERSION = YES; CLANG_WARN_COMMA = YES; CLANG_WARN_CONSTANT_CONVERSION = YES; CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES; CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR; CLANG_WARN_DOCUMENTATION_COMMENTS = YES; CLANG_WARN_EMPTY_BODY = YES; CLANG_WARN_ENUM_CONVERSION = YES; CLANG_WARN_INFINITE_RECURSION = YES; CLANG_WARN_INT_CONVERSION = YES; CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES; CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES; CLANG_WARN_OBJC_LITERAL_CONVERSION = YES; CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR; CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES; CLANG_WARN_RANGE_LOOP_ANALYSIS = YES; CLANG_WARN_STRICT_PROTOTYPES = YES; CLANG_WARN_SUSPICIOUS_MOVE = YES; CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE; CLANG_WARN_UNREACHABLE_CODE = YES; CLANG_WARN__DUPLICATE_METHOD_MATCH = YES; COPY_PHASE_STRIP = NO; DEBUG_INFORMATION_FORMAT = dwarf; DEVELOPMENT_LANGUAGE = en; ENABLE_STRICT_OBJC_MSGSEND = YES; ENABLE_TESTABILITY = YES; GCC_C_LANGUAGE_STANDARD = gnu17; GCC_DYNAMIC_NO_PIC = NO; GCC_NO_COMMON_BLOCKS = YES; GCC_OPTIMIZATION_LEVEL = 0; GCC_PREPROCESSOR_DEFINITIONS = ("DEBUG=1", "$(inherited)",); GCC_WARN_64_TO_32_BIT_CONVERSION = YES; GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR; GCC_WARN_UNDECLARED_SELECTOR = YES; GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE; GCC_WARN_UNUSED_FUNCTION = YES; GCC_WARN_UNUSED_VARIABLE = YES; MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE; MTL_FAST_MATH = YES; ONLY_ACTIVE_ARCH = YES; SDKROOT = macosx; }; name = Debug; };
+		D00000000000000000000002 /* Release */ = {isa = XCBuildConfiguration; buildSettings = {ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ANALYZER_NONNULL = YES; CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE; CLANG_CXX_LANGUAGE_STANDARD = "gnu++20"; CLANG_ENABLE_MODULES = YES; CLANG_ENABLE_OBJC_ARC = YES; CLANG_ENABLE_OBJC_WEAK = YES; CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES; CLANG_WARN_BOOL_CONVERSION = YES; CLANG_WARN_COMMA = YES; CLANG_WARN_CONSTANT_CONVERSION = YES; CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES; CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR; CLANG_WARN_DOCUMENTATION_COMMENTS = YES; CLANG_WARN_EMPTY_BODY = YES; CLANG_WARN_ENUM_CONVERSION = YES; CLANG_WARN_INFINITE_RECURSION = YES; CLANG_WARN_INT_CONVERSION = YES; CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES; CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES; CLANG_WARN_OBJC_LITERAL_CONVERSION = YES; CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR; CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES; CLANG_WARN_RANGE_LOOP_ANALYSIS = YES; CLANG_WARN_STRICT_PROTOTYPES = YES; CLANG_WARN_SUSPICIOUS_MOVE = YES; CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE; CLANG_WARN_UNREACHABLE_CODE = YES; CLANG_WARN__DUPLICATE_METHOD_MATCH = YES; COPY_PHASE_STRIP = NO; DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym"; DEVELOPMENT_LANGUAGE = en; ENABLE_NS_ASSERTIONS = NO; ENABLE_STRICT_OBJC_MSGSEND = YES; GCC_C_LANGUAGE_STANDARD = gnu17; GCC_NO_COMMON_BLOCKS = YES; GCC_WARN_64_TO_32_BIT_CONVERSION = YES; GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR; GCC_WARN_UNDECLARED_SELECTOR = YES; GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE; GCC_WARN_UNUSED_FUNCTION = YES; GCC_WARN_UNUSED_VARIABLE = YES; MTL_ENABLE_DEBUG_INFO = NO; MTL_FAST_MATH = YES; SDKROOT = macosx; }; name = Release; };
+		D00000000000000000000003 /* Debug */ = {isa = XCBuildConfiguration; baseConfigurationReference = 700000000000000000000032 /* Debug.xcconfig */; buildSettings = {}; name = Debug; };
+		D00000000000000000000004 /* Release */ = {isa = XCBuildConfiguration; baseConfigurationReference = 700000000000000000000033 /* Release.xcconfig */; buildSettings = {}; name = Release; };
+		D00000000000000000000005 /* Debug */ = {isa = XCBuildConfiguration; baseConfigurationReference = 700000000000000000000034 /* Tests.xcconfig */; buildSettings = {SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG; SWIFT_OPTIMIZATION_LEVEL = "-Onone"; }; name = Debug; };
+		D00000000000000000000006 /* Release */ = {isa = XCBuildConfiguration; baseConfigurationReference = 700000000000000000000034 /* Tests.xcconfig */; buildSettings = {SWIFT_COMPILATION_MODE = wholemodule; SWIFT_OPTIMIZATION_LEVEL = "-O"; }; name = Release; };
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E00000000000000000000001 /* Build configuration list for PBXProject "Bako" */ = {isa = XCConfigurationList; buildConfigurations = (D00000000000000000000001 /* Debug */, D00000000000000000000002 /* Release */,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		E00000000000000000000002 /* Build configuration list for PBXNativeTarget "BakoApp" */ = {isa = XCConfigurationList; buildConfigurations = (D00000000000000000000003 /* Debug */, D00000000000000000000004 /* Release */,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		E00000000000000000000003 /* Build configuration list for PBXNativeTarget "BakoAppTests" */ = {isa = XCConfigurationList; buildConfigurations = (D00000000000000000000005 /* Debug */, D00000000000000000000006 /* Release */,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F00000000000000000000001 /* XCRemoteSwiftPackageReference "Sparkle" */ = {isa = XCRemoteSwiftPackageReference; repositoryURL = "https://github.com/sparkle-project/Sparkle"; requirement = {kind = upToNextMajorVersion; minimumVersion = 2.9.6; }; };
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F00000000000000000000002 /* Sparkle */ = {isa = XCSwiftPackageProductDependency; package = F00000000000000000000001 /* XCRemoteSwiftPackageReference "Sparkle" */; productName = Sparkle; };
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = A00000000000000000000001 /* Project object */;
+}
