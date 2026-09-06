@@ -179,16 +179,7 @@ jobs:
           cp "${{ steps.notes.outputs.notes_path }}" "$APPCAST_DIR/"
           SPARKLE_APPCAST_TOOL="$(find "$PWD" "$HOME/Library/Developer/Xcode/DerivedData" -name generate_appcast -type f 2>/dev/null | head -1)"
           if [[ -z "$SPARKLE_APPCAST_TOOL" ]]; then
-            SPARKLE_VERSION="$(python3 - <<'PY'
-import json
-with open('Bako.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved') as f:
-    data = json.load(f)
-for pin in data['pins']:
-    if pin['identity'] == 'sparkle':
-        print(pin['state']['version'])
-        break
-PY
-)"
+            SPARKLE_VERSION="$(python3 -c 'import json; data=json.load(open("Bako.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved")); print(next(pin["state"]["version"] for pin in data["pins"] if pin["identity"] == "sparkle"))')"
             SPARKLE_TOOLS_DIR="$PWD/.sparkle-tools"
             mkdir -p "$SPARKLE_TOOLS_DIR"
             curl -fsSL "https://github.com/sparkle-project/Sparkle/releases/download/${SPARKLE_VERSION}/Sparkle-${SPARKLE_VERSION}.tar.xz" \
