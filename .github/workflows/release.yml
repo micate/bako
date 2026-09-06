@@ -191,12 +191,47 @@ jobs:
             echo "Could not find Sparkle generate_appcast tool" >&2
             exit 1
           fi
-          printf '%s' "$SPARKLE_PRIVATE_KEY" | "$SPARKLE_APPCAST_TOOL" \
+          SPARKLE_PRIVATE_KEY_CLEAN="$(python3 - <<'PY'
+          import base64
+          import os
+          import re
+          import sys
+
+          value = os.environ.get("SPARKLE_PRIVATE_KEY", "").strip()
+          compact = re.sub(r"\s+", "", value)
+
+          def is_base64_key(candidate):
+              try:
+                  base64.b64decode(candidate, validate=True)
+                  return True
+              except Exception:
+                  return False
+
+          if is_base64_key(compact):
+              print(compact)
+              sys.exit(0)
+
+          matches = re.findall(r"[A-Za-z0-9+/]{40,}={0,2}", value)
+          for match in matches:
+              if is_base64_key(match):
+                  print(match)
+                  sys.exit(0)
+
+          print("SPARKLE_PRIVATE_KEY must contain the base64 private key exported by Sparkle generate_keys -x.", file=sys.stderr)
+          sys.exit(1)
+          PY
+          )"
+          APPCAST_LOG="$RUNNER_TEMP/generate_appcast.log"
+          printf '%s' "$SPARKLE_PRIVATE_KEY_CLEAN" | "$SPARKLE_APPCAST_TOOL" \
             --ed-key-file - \
             --download-url-prefix "$DOWNLOAD_URL_PREFIX_BASE/${{ steps.meta.outputs.tag }}/" \
             --embed-release-notes \
             --maximum-versions 10 \
-            "$APPCAST_DIR"
+            "$APPCAST_DIR" 2>&1 | tee "$APPCAST_LOG"
+          if grep -q 'does not match key EdDSA' "$APPCAST_LOG"; then
+            echo "SPARKLE_PRIVATE_KEY does not match the public key embedded in the app. Export the matching private key with Sparkle generate_keys -x and update the secret." >&2
+            exit 1
+          fi
           if ! grep -q 'sparkle:edSignature=' "$APPCAST_DIR/appcast.xml"; then
             echo "Generated appcast is missing sparkle:edSignature. Check that SPARKLE_PRIVATE_KEY matches SPARKLE_PUBLIC_ED_KEY." >&2
             exit 1
