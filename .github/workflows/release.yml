@@ -123,7 +123,7 @@ jobs:
         run: |
           set -euo pipefail
           APP_PATH="$PWD/build/${APP_NAME}.xcarchive/Products/Applications/${APP_NAME}.app"
-          DIST_DIR="$PWD/dist"
+          DIST_DIR="dist"
           ZIP_PATH="$DIST_DIR/${{ steps.meta.outputs.archive_basename }}.zip"
           mkdir -p "$DIST_DIR"
           ditto -c -k --keepParent "$APP_PATH" "$ZIP_PATH"
@@ -136,7 +136,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          NOTES_PATH="$PWD/dist/${{ steps.meta.outputs.archive_basename }}.md"
+          NOTES_PATH="dist/${{ steps.meta.outputs.archive_basename }}.md"
           PREVIOUS_TAG="$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || true)"
           {
             echo "# Bako ${{ steps.meta.outputs.version }}"
@@ -182,12 +182,16 @@ jobs:
             echo "Could not find Sparkle generate_appcast tool" >&2
             exit 1
           fi
-          echo "$SPARKLE_PRIVATE_KEY" | "$SPARKLE_APPCAST_TOOL" \
+          printf '%s' "$SPARKLE_PRIVATE_KEY" | "$SPARKLE_APPCAST_TOOL" \
             --ed-key-file - \
             --download-url-prefix "$DOWNLOAD_URL_PREFIX_BASE/${{ steps.meta.outputs.tag }}/" \
             --embed-release-notes \
             --maximum-versions 10 \
             "$APPCAST_DIR"
+          if ! grep -q 'sparkle:edSignature=' "$APPCAST_DIR/appcast.xml"; then
+            echo "Generated appcast is missing sparkle:edSignature. Check that SPARKLE_PRIVATE_KEY matches SPARKLE_PUBLIC_ED_KEY." >&2
+            exit 1
+          fi
           mkdir -p "$PWD/public"
           cp "$APPCAST_DIR/appcast.xml" "$PWD/public/appcast.xml"
           touch "$PWD/public/.nojekyll"
