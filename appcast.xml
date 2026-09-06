@@ -1,0 +1,31 @@
+<?xml version="1.0" standalone="yes"?>
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+    <channel>
+        <title>Bako</title>
+        <item>
+            <title>0.1.1</title>
+            <pubDate>Sun, 06 Sep 2026 10:17:49 +0000</pubDate>
+            <sparkle:version>8</sparkle:version>
+            <sparkle:shortVersionString>0.1.1</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <sparkle:hardwareRequirements>arm64</sparkle:hardwareRequirements>
+            <description sparkle:format="markdown"><![CDATA[# Bako 0.1.1
+
+- fix(workflow): normalize Sparkle private key secret
+- fix(workflow): repair release yaml syntax
+- fix(workflow): download Sparkle appcast tool when missing
+- fix: make catalog contract test locale-independent
+- fix(workflow): correct DIST_DIR and NOTES_PATH paths in release.yml; add validation for appcast signature
+- docs: enhance README with group workflow feature and updated screenshots
+- chore: update .gitignore to include Build directory
+- docs: add app screenshots to README
+- Add internal Sparkle release workflow
+- chore: update Swift tools version and development environment requirements to Swift 5.7 and Xcode 14.2
+- fix(config): enable autofill for one-time code on mac
+- feat: refine group controls and macOS integration
+- Initial commit
+]]></description>
+            <enclosure url="https://github.com/micate/bako/releases/download/v0.1.1/Bako-0.1.1.zip" length="3356267" type="application/octet-stream" sparkle:edSignature="53U+dSPwhMiEFNJRenV7Ewq19ZNehk5jUtsTYmFZ88H1wvdz5ePGiw3gJv/sABsmM792u0ufs84jP+at0SUDDA=="/>
+        </item>
+    </channel>
+</rss>
