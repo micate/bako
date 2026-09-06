@@ -29,6 +29,36 @@ cp Config/Local.xcconfig.example Config/Local.xcconfig
 
 在忽略提交的 `Local.xcconfig` 中填写 `DEVELOPMENT_TEAM`、`BAKO_UPDATE_FEED_URL` 和 `BAKO_UPDATE_PUBLIC_ED_KEY`。版本号与 build number 提交到 `Config/Base.xcconfig`，确保每个发布版本可追踪。
 
+## GitHub 内测 / 自用自动发布
+
+仓库包含 `.github/workflows/release.yml`，推送 `v*` tag 时会自动构建、使用 ad-hoc 签名、上传 GitHub Release，并更新 GitHub Pages 上的 Sparkle `appcast.xml`。该流程不需要 Apple Developer ID，也不会公证；它只适合内测或自用分发。
+
+默认 feed 地址是：
+
+```text
+https://micate.github.io/bako/appcast.xml
+```
+
+需要先在 GitHub 仓库启用 Pages，Source 选择 `Deploy from a branch`，分支选择 `gh-pages` / root。首次成功发布后，工作流会自动创建或更新该分支。
+
+需要配置以下 GitHub Actions Secrets：
+
+| Secret | 用途 |
+|---|---|
+| `SPARKLE_PRIVATE_KEY` | Sparkle EdDSA 私钥，供 `generate_appcast` 签名 |
+| `SPARKLE_PUBLIC_ED_KEY` | Sparkle EdDSA 公钥，会写入 App 的 `SUPublicEDKey` |
+
+发布方式：
+
+```bash
+git tag v0.1.1
+git push origin v0.1.1
+```
+
+工作流使用 tag 去掉 `v` 后的值作为 `CFBundleShortVersionString`，使用 GitHub Actions `run_number` 作为递增的 `CFBundleVersion`。GitHub Release asset 作为下载源，GitHub Pages 只托管 `appcast.xml`。
+
+由于内测包未经过 Developer ID 签名和公证，首次安装时 macOS 可能拦截，需要用户右键打开或在系统设置中允许打开。
+
 ## 首次准备
 
 1. 使用 Sparkle 分发包中的 `generate_keys` 生成 EdDSA 密钥。

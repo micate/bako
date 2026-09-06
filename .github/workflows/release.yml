@@ -1,0 +1,210 @@
+name: Internal Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version without v prefix, for example 0.1.1'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  APP_NAME: Bako
+  SCHEME: Bako
+  PROJECT: Bako.xcodeproj
+  FEED_URL: https://micate.github.io/bako/appcast.xml
+  DOWNLOAD_URL_PREFIX_BASE: https://github.com/micate/bako/releases/download
+
+jobs:
+  release:
+    name: Build ad-hoc signed app and publish Sparkle appcast
+    runs-on: macos-14
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Resolve release metadata
+        id: meta
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
+            VERSION="${{ inputs.version }}"
+            TAG="v${VERSION}"
+          else
+            TAG="${GITHUB_REF_NAME}"
+            VERSION="${TAG#v}"
+          fi
+          if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+([-.][A-Za-z0-9.]+)?$ ]]; then
+            echo "Version must look like 1.2.3 or 1.2.3-beta.1; got: $VERSION" >&2
+            exit 1
+          fi
+          BUILD_NUMBER="${GITHUB_RUN_NUMBER}"
+          ARCHIVE_BASENAME="${APP_NAME}-${VERSION}"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "build_number=$BUILD_NUMBER" >> "$GITHUB_OUTPUT"
+          echo "archive_basename=$ARCHIVE_BASENAME" >> "$GITHUB_OUTPUT"
+
+      - name: Validate required secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          missing=0
+          for name in \
+            SPARKLE_PRIVATE_KEY \
+            SPARKLE_PUBLIC_ED_KEY
+          do
+            if [[ -z "${!name:-}" ]]; then
+              echo "Missing secret: $name" >&2
+              missing=1
+            fi
+          done
+          exit "$missing"
+        env:
+          SPARKLE_PRIVATE_KEY: ${{ secrets.SPARKLE_PRIVATE_KEY }}
+          SPARKLE_PUBLIC_ED_KEY: ${{ secrets.SPARKLE_PUBLIC_ED_KEY }}
+
+      - name: Run tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          xcodebuild test \
+            -project "$PROJECT" \
+            -scheme "$SCHEME" \
+            -configuration Debug \
+            -destination 'platform=macOS' \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: Build ad-hoc signed archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          xcodebuild archive \
+            -project "$PROJECT" \
+            -scheme "$SCHEME" \
+            -configuration Release \
+            -archivePath "$PWD/build/${APP_NAME}.xcarchive" \
+            MARKETING_VERSION="${{ steps.meta.outputs.version }}" \
+            CURRENT_PROJECT_VERSION="${{ steps.meta.outputs.build_number }}" \
+            CODE_SIGNING_ALLOWED=YES \
+            CODE_SIGN_STYLE=Manual \
+            CODE_SIGN_IDENTITY="-" \
+            CODE_SIGN_ENTITLEMENTS="Config/Bako-Debug.entitlements" \
+            BAKO_UPDATE_FEED_URL="$FEED_URL" \
+            BAKO_UPDATE_PUBLIC_ED_KEY="$SPARKLE_PUBLIC_ED_KEY"
+        env:
+          SPARKLE_PUBLIC_ED_KEY: ${{ secrets.SPARKLE_PUBLIC_ED_KEY }}
+
+      - name: Verify ad-hoc signature
+        shell: bash
+        run: |
+          set -euo pipefail
+          APP_PATH="$PWD/build/${APP_NAME}.xcarchive/Products/Applications/${APP_NAME}.app"
+          codesign --verify --deep --strict --verbose=2 "$APP_PATH"
+          codesign -dv --verbose=4 "$APP_PATH"
+
+      - name: Package final update archive
+        id: package
+        shell: bash
+        run: |
+          set -euo pipefail
+          APP_PATH="$PWD/build/${APP_NAME}.xcarchive/Products/Applications/${APP_NAME}.app"
+          DIST_DIR="$PWD/dist"
+          ZIP_PATH="$DIST_DIR/${{ steps.meta.outputs.archive_basename }}.zip"
+          mkdir -p "$DIST_DIR"
+          ditto -c -k --keepParent "$APP_PATH" "$ZIP_PATH"
+          codesign --verify --deep --strict --verbose=2 "$APP_PATH"
+          echo "Skipping Gatekeeper assessment: this internal build is ad-hoc signed and not notarized."
+          echo "zip_path=$ZIP_PATH" >> "$GITHUB_OUTPUT"
+
+      - name: Create release notes
+        id: notes
+        shell: bash
+        run: |
+          set -euo pipefail
+          NOTES_PATH="$PWD/dist/${{ steps.meta.outputs.archive_basename }}.md"
+          PREVIOUS_TAG="$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || true)"
+          {
+            echo "# Bako ${{ steps.meta.outputs.version }}"
+            echo
+            if [[ -n "$PREVIOUS_TAG" ]]; then
+              git log --pretty=format:'- %s' "$PREVIOUS_TAG..HEAD"
+            else
+              git log --pretty=format:'- %s' -20
+            fi
+            echo
+          } > "$NOTES_PATH"
+          echo "notes_path=$NOTES_PATH" >> "$GITHUB_OUTPUT"
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.meta.outputs.tag }}
+          name: Bako ${{ steps.meta.outputs.version }}
+          body_path: ${{ steps.notes.outputs.notes_path }}
+          files: |
+            ${{ steps.package.outputs.zip_path }}
+            ${{ steps.notes.outputs.notes_path }}
+          fail_on_unmatched_files: true
+
+      - name: Generate Sparkle appcast
+        shell: bash
+        run: |
+          set -euo pipefail
+          APPCAST_DIR="$PWD/appcast-work"
+          mkdir -p "$APPCAST_DIR"
+          if git ls-remote --exit-code --heads origin gh-pages >/dev/null 2>&1; then
+            git fetch origin gh-pages:refs/remotes/origin/gh-pages
+            if git show origin/gh-pages:appcast.xml > "$APPCAST_DIR/appcast.xml.tmp" 2>/dev/null; then
+              mv "$APPCAST_DIR/appcast.xml.tmp" "$APPCAST_DIR/appcast.xml"
+            else
+              rm -f "$APPCAST_DIR/appcast.xml.tmp"
+            fi
+          fi
+          cp "${{ steps.package.outputs.zip_path }}" "$APPCAST_DIR/"
+          cp "${{ steps.notes.outputs.notes_path }}" "$APPCAST_DIR/"
+          SPARKLE_APPCAST_TOOL="$(find "$PWD" "$HOME/Library/Developer/Xcode/DerivedData" -path '*/sparkle/bin/generate_appcast' -type f 2>/dev/null | head -1)"
+          if [[ -z "$SPARKLE_APPCAST_TOOL" ]]; then
+            echo "Could not find Sparkle generate_appcast tool" >&2
+            exit 1
+          fi
+          echo "$SPARKLE_PRIVATE_KEY" | "$SPARKLE_APPCAST_TOOL" \
+            --ed-key-file - \
+            --download-url-prefix "$DOWNLOAD_URL_PREFIX_BASE/${{ steps.meta.outputs.tag }}/" \
+            --embed-release-notes \
+            --maximum-versions 10 \
+            "$APPCAST_DIR"
+          mkdir -p "$PWD/public"
+          cp "$APPCAST_DIR/appcast.xml" "$PWD/public/appcast.xml"
+          touch "$PWD/public/.nojekyll"
+        env:
+          SPARKLE_PRIVATE_KEY: ${{ secrets.SPARKLE_PRIVATE_KEY }}
+
+      - name: Publish appcast to GitHub Pages branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./public
+          keep_files: true
+          commit_message: Update Sparkle appcast for ${{ steps.meta.outputs.tag }}
+
+      - name: Upload appcast artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: appcast
+          path: public/appcast.xml
