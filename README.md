@@ -2,6 +2,10 @@
 
 Bako 是一款面向 macOS 12 及以上版本的本机 Agent Skills 集中管理工具。它把分散在各 Agent 用户目录中的 Skills 迁移到中央存储，再通过软链接挂载回原目录；用户可以用分组一次切换多个 Agent 的 Skill 组合。
 
+![Bako Skills view screenshot](docs/assets/bako-screenshot.png)
+
+![Bako Groups view screenshot](docs/assets/bako-groups-screenshot.png)
+
 > 当前状态：已有可运行的 Swift Package 和 Xcode macOS App target。核心迁移、分组、恢复和持久化流程已实现；正式分发仍需配置开发者签名、更新源并执行公证。
 
 ## 当前能力
