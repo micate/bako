@@ -33,7 +33,7 @@ Bako 是一款面向 macOS 12 及以上版本的本机 Agent Skills 集中管理
 ## 开发环境
 
 - macOS 12+
-- Xcode 15+ / Swift 5.9+
+- Xcode 14.2+ / Swift 5.7+
 - Swift Package Manager
 - Sparkle 2.9.6
 - 系统 SQLite 3
