@@ -47,7 +47,7 @@ final class AgentCatalogContractTests: XCTestCase {
         XCTAssertEqual(sharedTargets.count, 1)
         XCTAssertEqual(shared.endpoint.pathTemplate, "~/.agents/skills")
         XCTAssertNil(shared.originAgentID)
-        XCTAssertEqual(shared.groupName, "已导入 · 所有兼容 Agent")
+        XCTAssertEqual(shared.groupName, L10n.string("agent.imported_group", L10n.string("agent.shared")))
         XCTAssertEqual(shared.groupTarget, .shared("shared-agents"))
     }
 
